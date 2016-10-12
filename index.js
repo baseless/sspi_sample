@@ -6,7 +6,10 @@ var server = require('http').createServer(app);
 app.use(function (req, res, next) {
   var nodeSSPI = require('node-sspi');
   var nodeSSPIObj = new nodeSSPI({
-    retrieveGroups: true
+    retrieveGroups: true,
+    useSSPI: true,
+    perRequestAuth: true,
+    authoritative: true
   });
   nodeSSPIObj.authenticate(req, res, function(err){
     res.finished || next();
